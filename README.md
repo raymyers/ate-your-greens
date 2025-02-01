@@ -1,10 +1,16 @@
 # Ate Your Greens
 
-Unofficial syntax for [EYG lang](https://github.com/CrowdHailer/eyg-lang) and verifier for the pure subset.
+Unofficial syntax for [EYG lang](https://github.com/CrowdHailer/eyg-lang) and (eventually) verifier for the pure subset.
 
 EYG = Eat Your Greens, a metaphor for choices with long-term benefit. It's a small language being created by Peter Saxton with interesting properties.
 
 AYG = *Ate* Your Greens. It's an exploration of what some of EYG's long-term benefits could be. The focus on pure code (no side-effects) gives us a useful subset to start with for prototyping compilation and Formal Verification.
+
+## Status
+
+* Define syntax and parser for EYG - DONE
+* Transform AST to IR - Soon
+* Enable verification on IR pure subset - Soon-ish
 
 ## Syntax
 
@@ -36,11 +42,7 @@ More examples in `examples` folder. There are some decisions made to make it eas
 
 * Semi-colons after `let` are not mandatory
 
-## Status
-
-* Define syntax and parser for EYG - DONE
-* Transform AST to IR - Soon
-* Enable verification on IR pure subset - Soon-ish
+## Targets
 
 The parser is generated with [BNFC](https://github.com/BNFC/bnfc), which creates compiler front-ends for multiple languages.
 
@@ -74,9 +76,13 @@ make
 
 ## Run
 
+This will run the parser and show diagostic output.
+
+```
 ./generated/haskell/Eyg/Test examples/example1.eyg 
 
-./generated/haskell/Eyg/Test examples/example-all.eyg 
+./generated/haskell/Eyg/Test examples/example-all.eyg
+```
 
 ## Generate parser
 
