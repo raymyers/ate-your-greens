@@ -46,7 +46,7 @@ The parser is generated with [BNFC](https://github.com/BNFC/bnfc), which creates
 
 * Haskell (Tested)
 * Java
-* C
+* C (Tested)
 * C++
 * OCaml
 
