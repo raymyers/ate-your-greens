@@ -2,9 +2,9 @@
 
 Unofficial syntax for [EYG lang](https://github.com/CrowdHailer/eyg-lang) and verifier for the pure subset.
 
-EYG means Eat Your Greens, a metaphor for choices with long-term benefit.
+EYG = Eat Your Greens, a metaphor for choices with long-term benefit. It's a small language being created by Peter Saxton with interesting properties.
 
-AYG = Ate Your Greens, or Applicative EYG. "Ate" in the past tense means to imply exploration of what some of EYG's long-term benefits could be. 
+AYG = *Ate* Your Greens. It's an exploration of what some of EYG's long-term benefits could be. The focus on pure code (no side-effects) gives us a useful subset to start with for prototyping compilation and Formal Verification.
 
 ## Syntax
 
@@ -30,6 +30,8 @@ let page = !string_to_binary(page);
 perform Download({name: "index.html", content: page})
 ```
 
+The AYG subset would disallow the `perform` keyword.
+
 More examples in `examples` folder. There are some decisions made to make it easier to generate parsers for many languages. For instance:
 
 * Semi-colons after `let` are not mandatory
@@ -38,7 +40,7 @@ More examples in `examples` folder. There are some decisions made to make it eas
 
 * Define syntax and parser for EYG - DONE
 * Transform AST to IR - Soon
-* Enable verification on pure IR subset - Soon-ish
+* Enable verification on IR pure subset - Soon-ish
 
 The parser is generated with [BNFC](https://github.com/BNFC/bnfc), which creates compiler front-ends for multiple languages.
 
@@ -65,7 +67,7 @@ Explanation of dependencies TBD.
 
 ## Build
 
-``
+```
 cd generated/haskell
 make
 ```
