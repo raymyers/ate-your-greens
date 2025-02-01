@@ -16,6 +16,6 @@ latex:
     bnfc --latex -m grammar/Eyg.cf -o doc/syntax/
 
 doc: latex
-    pdflatex doc/syntax/Eyg.tex
+    cd doc/syntax && make
 
 build-all: build-haskell doc
