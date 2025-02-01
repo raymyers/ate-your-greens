@@ -15,12 +15,20 @@ bnfc-c:
 build-c: bnfc-c
     cd generated/c && make
 
+build-java: bnfc-java
+    cd java-runner && ./gradlew build install
+
+bnfc-java:
+    bnfc -m grammar/Eyg.cf --java-antlr -o java-runner/app/src/main/java
 
 test-haskell:
     ./generated/haskell/Eyg/Test examples/example-all.eyg 
 
 test-c:
     ./generated/c/TestEyg examples/example-all.eyg 
+
+test-java:
+    java-runner/app/build/install/app/bin/app examples/example-all.eyg
 
 latex:
     bnfc --latex -m grammar/Eyg.cf -o doc/syntax/

@@ -47,7 +47,7 @@ More examples in `examples` folder. There are some decisions made to make it eas
 The parser is generated with [BNFC](https://github.com/BNFC/bnfc), which creates compiler front-ends for multiple languages.
 
 * Haskell (Tested)
-* Java
+* Java (Tested)
 * C (Tested)
 * C++
 * OCaml
