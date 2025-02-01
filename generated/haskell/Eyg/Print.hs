@@ -209,10 +209,6 @@ instance Print Eyg.Abs.Param where
   prt i = \case
     Eyg.Abs.PId id_ -> prPrec i 0 (concatD [prt 0 id_])
 
-instance Print Eyg.Abs.Arg where
-  prt i = \case
-    Eyg.Abs.ArgExpr exp -> prPrec i 0 (concatD [prt 0 exp])
-
 instance Print Eyg.Abs.ListItem where
   prt i = \case
     Eyg.Abs.LIExpr exp -> prPrec i 0 (concatD [prt 0 exp])

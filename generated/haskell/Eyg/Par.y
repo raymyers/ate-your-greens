@@ -154,9 +154,6 @@ RecordField
 Param :: { Eyg.Abs.Param }
 Param : Id { Eyg.Abs.PId $1 }
 
-Arg :: { Eyg.Abs.Arg }
-Arg : Exp { Eyg.Abs.ArgExpr $1 }
-
 ListItem :: { Eyg.Abs.ListItem }
 ListItem
   : Exp { Eyg.Abs.LIExpr $1 } | '..' Exp { Eyg.Abs.LISpread $2 }

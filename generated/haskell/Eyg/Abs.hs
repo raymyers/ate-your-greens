@@ -44,9 +44,6 @@ data RecordField = RFKeyVal Id Exp | RFSpread Exp
 data Param = PId Id
   deriving (C.Eq, C.Ord, C.Show, C.Read)
 
-data Arg = ArgExpr Exp
-  deriving (C.Eq, C.Ord, C.Show, C.Read)
-
 data ListItem = LIExpr Exp | LISpread Exp
   deriving (C.Eq, C.Ord, C.Show, C.Read)
 

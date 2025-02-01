@@ -68,10 +68,6 @@ transParam :: Eyg.Abs.Param -> Result
 transParam x = case x of
   Eyg.Abs.PId id -> failure x
 
-transArg :: Eyg.Abs.Arg -> Result
-transArg x = case x of
-  Eyg.Abs.ArgExpr exp -> failure x
-
 transListItem :: Eyg.Abs.ListItem -> Result
 transListItem x = case x of
   Eyg.Abs.LIExpr exp -> failure x

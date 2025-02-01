@@ -61,7 +61,6 @@ RFSpread. RecordField ::= ".." Exp ;
 
 PId. Param ::= Id ;
 
-ArgExpr.  Arg ::= Exp ;
 LIExpr.  ListItem ::= Exp ;
 LISpread.  ListItem ::= ".." Exp;
 

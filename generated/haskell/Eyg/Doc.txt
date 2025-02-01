@@ -100,7 +100,6 @@ All other symbols are terminals.
   | //RecordField// | -> | //Id// ``:`` //Exp//
   |  |  **|**  | ``..`` //Exp//
   | //Param// | -> | //Id//
-  | //Arg// | -> | //Exp//
   | //ListItem// | -> | //Exp//
   |  |  **|**  | ``..`` //Exp//
 
