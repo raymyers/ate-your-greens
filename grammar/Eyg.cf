@@ -1,0 +1,74 @@
+entrypoints Program ;
+
+PExps. Program ::= Exp ;
+
+_. Exp   ::= Exp1 ;
+_. Exp1   ::= Exp2 ;
+_. Exp2  ::= Exp3 ;
+_. Exp3 ::= Exp4 ;
+_. Exp4 ::= Exp5 ;
+_. Exp5 ::= "(" Exp ")" ;
+
+ELet. Exp1 ::= "let" MatchPattern "=" Exp2 ";" Exp;
+
+-- Compound
+
+EList.   Exp2 ::= "[" [ListItem] "]" ;
+separator ListItem "," ;
+
+ERecord. Exp2 ::= "{" [RecordField] "}" ;
+separator RecordField "," ;
+
+ETagged. Exp2 ::= Tag Exp ;
+
+ELambda. Exp2 ::= "|" [Param] "|" "{" Exp "}";
+
+EPerform. Exp2 ::= "perform" Exp2;
+EHandle. Exp2 ::= "handle" Tag "(" Exp2 "," Exp2 ")";
+EMatch.  Exp2 ::= "match" Exp2 "{" "case" [MatchItem] "}";
+
+[].      [MatchItem] ::= ;
+(:[]).   [MatchItem] ::= MatchItem ;
+(:).     [MatchItem] ::= MatchItem "case" [MatchItem];
+
+EApply.  Exp3 ::= Exp3 "(" [Exp2] ")";
+ESelect. Exp3 ::= Exp3 "." Id;
+
+[].      [Exp2] ::= ;
+(:[]).   [Exp2] ::= Exp2 ;
+(:).     [Exp2] ::= Exp2 "," [Exp2];
+
+
+-- Atom
+
+EVar.   Exp4 ::= Id;
+EInt.   Exp4 ::= Integer;
+ENegInt. Exp4 ::= "-" Integer;
+EString. Exp4 ::= String;
+ENamedReference. Exp4 ::= NamedReference;
+
+separator Param ",";
+
+MatchItem0. MatchItem ::= MatchPattern "->" Exp ;
+
+MPTagged. MatchPattern ::= Tag MatchPattern ;
+MPRecord. MatchPattern ::= "{" [RecordField] "}" ;
+MPId. MatchPattern ::= Id ;
+_. MatchPattern ::= "(" MatchPattern ")" ;
+
+RFKeyVal. RecordField ::= Id ":" Exp ;
+RFSpread. RecordField ::= ".." Exp ;
+
+PId. Param ::= Id ;
+
+ArgExpr.  Arg ::= Exp ;
+LIExpr.  ListItem ::= Exp ;
+LISpread.  ListItem ::= ".." Exp;
+
+token NamedReference ('@' (letter | digit | '_')+ ':' digit+) ;
+
+token Tag (upper (letter | digit | '_')*) ;
+
+token Id ('!'? (lower | '_') (letter | digit | '_')*) ;
+
+comment "#" ;
