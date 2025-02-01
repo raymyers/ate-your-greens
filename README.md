@@ -8,7 +8,7 @@ AYG = *Ate* Your Greens. It's an exploration of what some of EYG's long-term ben
 
 ## Syntax
 
-EYG lang does not define a syntax, only an Intermediate Represenation (IR). Here is the unofficial syntax this repo defines: 
+EYG lang does not define a syntax, only an Intermediate Represenation (IR). This repo defines the following syntax over EYG: 
 
 ```rust
 let script = |closure| {
