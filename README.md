@@ -35,12 +35,9 @@ let page = !string_to_binary(page);
 
 perform Download({name: "index.html", content: page})
 ```
+More examples in `examples` folder.
 
-The AYG subset would disallow the `perform` keyword.
-
-More examples in `examples` folder. There are some decisions made to make it easier to generate parsers for many languages. For instance:
-
-* Semi-colons after `let` are not mandatory
+There are some decisions made to make it easier to generate parsers for many languages, for instance the semi-colon after `let` statements is mandatory.
 
 ## Targets
 
