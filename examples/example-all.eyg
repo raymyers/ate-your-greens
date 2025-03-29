@@ -1,175 +1,171 @@
-let ex_numbers = || {
-    let x = 5;
-
-    let y = 7;
-
+ex_numbers = || {
+    x = 5
+    y = 7
     !int_add(x, y)
-};
+}
 # => 12
 
-let ex_text = || {
-    let greeting = "Hello ";
-    let name = "world";
+ex_text = || {
+    greeting = "Hello "
+    name = "world"
     !string_append(greeting, name)
-};
+}
 # => "Hello World!"
 
-let ex_lists = || {
-    let items = [1, 2];
-    let items = [10, ..items];
-    let total = !list_fold(items, 0, !int_add);
+ex_lists = || {
+    items = [1, 2]
+    items = [10, ..items]
+    total = !list_fold(items, 0, !int_add)
     total
-};
+}
 # => 13
 
-let ex_records = || {
-    let alice = {name: "Alice"};
-    let bob = {name: "Bob", height: 192};
+ex_records = || {
+    alice = {name: "Alice"}
+    bob = {name: "Bob", height: 192}
     alice.name
-};
+}
 # => Alice
 
-let ex_record_spread = || {
-    let bob = {name: "Bob", height: 192};
+ex_record_spread = || {
+    bob = {name: "Bob", height: 192}
     {height: 100, ..bob}
-};
+}
 # => {height: 100, name: "Bob"}
 
-let ex_match = || {
+ex_match = || {
     match !int_parse("not a number") {
-        case Ok(value) -> value
-        case Error(_) -> -1
+        Ok(value) -> value
+        Error(_) -> -1
     }
-};
+}
 # => -1
 
-let ex_match_no_paren = || {
+ex_match_no_paren = || {
     match !int_parse("not a number") {
-        case Ok value -> value
-        case Error _ -> -1
+        Ok value -> value
+        Error _ -> -1
     }
-};
+}
 # => -1
 
-let ex_match_union = || {
+ex_match_union = || {
     match Cat("felix") {
-        case Cat(name) -> name
-        case (_) -> "wild"
+        Cat(name) -> name
+        (_) -> "wild"
     }
-};
+}
 # => Felix
 
-let ex_match_union_no_paren = || {
+ex_match_union_no_paren = || {
     match Cat "felix" {
-        case Cat name -> name
-        case _ -> "wild"
+        Cat name -> name
+        _ -> "wild"
     }
-};
+}
 # => Felix
 
-let match_on_let = || {
-    let {food: f} = {food: "Greens", action: "eat"};
+match_on_let = || {
+    {food: f} = {food: "Greens", action: "eat"}
     f
-};
+}
 # => "Greens
 
-
-let ex_functions = || {
-    let inc = !int_add(1);
-    let twice = |f, x| {
+ex_functions = || {
+    inc = !int_add(1)
+    twice = |f, x| {
         f(f(x))
-    };
-    let inc2 = twice(inc);
+    }
+    inc2 = twice(inc)
     inc2(5)
-};
+}
 # => 7
 
-let ex_higher_order_functions = || {
-    let inc = !int_add(1);
-    let count = !fix(|count, total, rest| {
+ex_higher_order_functions = || {
+    inc = !int_add(1)
+    count = !fix(|count, total, rest| {
         match !list_pop(rest) {
             # block { } not allowed here, so using paren.
             # But maybe that should change?
-            case Ok ({tail: rest}) -> (
-                let total = inc(total);
+            Ok ({tail: rest}) -> (
+                total = inc(total)
                 count(total, rest)
             )
-            case Error (_) -> total
+            Error (_) -> total
         }
-    });
-    let count = count(0);
+    })
+    count = count(0)
     count([5])
-};
+}
 # => 1
 
-let ex_builtin = || {
-    let total = !int_multiply(90, 3);
-    let total = !into_to_string(total);
-    let notice = !string_append("The total is: ", total);
+ex_builtin = || {
+    total = !int_multiply(90, 3)
+    total = !into_to_string(total)
+    notice = !string_append("The total is: ", total)
     notice
-};
+}
 # => "The total is: 270"
 
-let ex_named_references = || {
-    let std = @std:1;
+ex_named_references = || {
+    std = @std:1
     std.list.contains([1], 0)
-};
+}
 # => False({})
 
-let ex_perform = || {
-    let question = "Hello, what is your name?";
+ex_perform = || {
+    question = "Hello, what is your name?"
     match perform Prompt(question) {
-        case Ok name -> perform Alert(!string_append("hello,", name))
-        case Error _ -> perform Alert("I didn't catch your name.")
+        Ok name -> perform Alert(!string_append("hello,", name))
+        Error _ -> perform Alert("I didn't catch your name.")
     }
-};
+}
 
-let ex_handle = || {
-    let capture = |exec| {
+ex_handle = || {
+    capture = |exec| {
         handle Alert(
             |value, resume| {
-                let {return: return, alerts: alerts} = resume({});
+                {return: return, alerts: alerts} = resume({})
                 {return: return, alerts: [value, ..alerts]}
             },
             |_| { {alerts: [], return: exec({})} }
             # Not currently supporting optional trailing comma.
         )
-    };
-    let run = |_| {
-        let _ = perform Alert("first");
-        let _ = perform Alert("second");
+    }
+    run = |_| {
+        _ = perform Alert("first")
+        _ = perform Alert("second")
         {}
-    };
+    }
     {}
-};
+}
 # => {alerts: ["first", "second"], return: {}}
 
-let ex_multiple_resumptions = || {
-    let std = @std:1;
-    let capture = |exec| {
-         handle Flip(
+ex_multiple_resumptions = || {
+    std = @std:1
+    capture = |exec| {
+            handle Flip(
             |value, resume| {
-                let truthy = resume(True({}));
-                let falsy = resume(False({}));
+                truthy = resume(True({}))
+                falsy = resume(False({}))
                 std.list.flatten([truthy, falsy])
             },
             |_| { [exec({})] }
         )
-    };
-    let run = |_| {
-        let first = perform Flip({});
-        let second = perform Flip({});
+    }
+    run = |_| {
+        first = perform Flip({})
+        second = perform Flip({})
         {second: second, first: first}
-    };
+    }
     capture(run)
-};
+}
 
-let ex_closure_serialization = || {
-    let greeting = "hey";
-    let ignored = "this string doesn't get transpiled";
-    let func = !to_javascript(|_| { !string_append(greeting, "Alice") }, {});
+ex_closure_serialization = || {
+    greeting = "hey"
+    ignored = "this string doesn't get transpiled"
+    func = !to_javascript(|_| { !string_append(greeting, "Alice") }, {})
     func
-};
+}
 
 {}
-

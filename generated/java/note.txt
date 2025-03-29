@@ -1,3 +1,0 @@
-Look here for generated java:
-
-java-runner/app/src/main/java/eyg

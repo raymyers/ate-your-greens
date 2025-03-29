@@ -1,0 +1,198 @@
+[
+  {
+    "name": "variable",
+    "source": {
+      "0": "v",
+      "l": "foo"
+    },
+    "code": "foo"
+  },
+  {
+    "name": "function",
+    "source": {
+      "0": "f",
+      "l": "x",
+      "b": {
+        "0": "v",
+        "l": "x"
+      }
+    },
+    "code": "|x| { x }"
+  },
+  {
+    "name": "apply",
+    "source": {
+      "0": "a",
+      "f": {
+        "0": "f",
+        "l": "x",
+        "b": {
+          "0": "v",
+          "l": "x"
+        }
+      },
+      "a": {
+        "0": "s",
+        "v": "foo"
+      }
+    },
+    "code": "(|x| { x })(\"foo\")"
+  },
+  {
+    "name": "let",
+    "source": {
+      "0": "l",
+      "l": "x",
+      "v": {
+        "0": "s",
+        "v": "hi"
+      },
+      "t": {
+        "0": "v",
+        "l": "x"
+      }
+    },
+    "code": "let x = \"hi\"\nx"
+  },
+  {
+    "name": "binary",
+    "source": {
+      "0": "x",
+      "v": {
+        "/": {
+          "bytes": "AQ"
+        }
+      }
+    },
+    "code": "binary(0x01)"
+  },
+  {
+    "name": "integer",
+    "source": {
+      "0": "i",
+      "v": 5
+    },
+    "code": "5"
+  },
+  {
+    "name": "string",
+    "source": {
+      "0": "s",
+      "v": "hello"
+    },
+    "code": "\"hello\""
+  },
+  {
+    "name": "empty list",
+    "source": {
+      "0": "ta"
+    },
+    "code": "[]"
+  },
+  {
+    "name": "list cons",
+    "source": {
+      "0": "c"
+    },
+    "code": "cons"
+  },
+  {
+    "name": "vacant",
+    "source": {
+      "0": "z"
+    },
+    "code": "vacant()"
+  },
+  {
+    "name": "empty record",
+    "source": {
+      "0": "u"
+    },
+    "code": "{}"
+  },
+  {
+    "name": "extend record",
+    "source": {
+      "0": "e",
+      "l": "foo"
+    },
+    "code": "extend(\"foo\")"
+  },
+  {
+    "name": "select field",
+    "source": {
+      "0": "g",
+      "l": "foo"
+    },
+    "code": "select(\"foo\")"
+  },
+  {
+    "name": "tag",
+    "source": {
+      "0": "t",
+      "l": "Ok"
+    },
+    "code": "tag(\"Ok\")"
+  },
+  {
+    "name": "match",
+    "source": {
+      "0": "m",
+      "l": "Ok"
+    },
+    "code": "case(\"Ok\")"
+  },
+  {
+    "name": "no match",
+    "source": {
+      "0": "n"
+    },
+    "code": "noMatch()"
+  },
+  {
+    "name": "perform effect",
+    "source": {
+      "0": "p",
+      "l": "Log"
+    },
+    "code": "perform(\"Log\")"
+  },
+  {
+    "name": "handle effect",
+    "source": {
+      "0": "h",
+      "l": "Abort"
+    },
+    "code": "handle(\"Abort\")"
+  },
+  {
+    "name": "add integer builtin",
+    "source": {
+      "0": "b",
+      "l": "int_add"
+    },
+    "code": "builtin(\"int_add\")"
+  },
+  {
+    "name": "cid reference",
+    "source": {
+      "0": "#",
+      "l": {
+        "/": "baguqeeraqyvjt4lhfr66jw66yhg37xaj7tvdde5pifx7eqdq2a4zgzpffwaq"
+      }
+    },
+    "code": "reference(\"baguqeeraqyvjt4lhfr66jw66yhg37xaj7tvdde5pifx7eqdq2a4zgzpffwaq\")"
+  },
+  {
+    "name": "release",
+    "source": {
+      "0": "@",
+      "p": "welcome",
+      "r": 1,
+      "l": {
+        "/": "baguqeeraqyvjt4lhfr66jw66yhg37xaj7tvdde5pifx7eqdq2a4zgzpffwaq"
+      }
+    },
+    "code": "release(\"welcome\", 1, \"baguqeeraqyvjt4lhfr66jw66yhg37xaj7tvdde5pifx7eqdq2a4zgzpffwaq\")"
+  }
+]

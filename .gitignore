@@ -30,3 +30,7 @@ TestEyg
 
 # Java
 *.class
+
+.venv/
+.idea/
+/old/
