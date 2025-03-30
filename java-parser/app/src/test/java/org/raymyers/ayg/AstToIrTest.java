@@ -1,5 +1,6 @@
 package org.raymyers.ayg;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -12,17 +13,19 @@ import org.junit.jupiter.params.provider.ArgumentsProvider;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
+import org.raymyers.ayg.ast.Ir;
 
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.StringJoiner;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AstToIrTest {
+
+    private ObjectMapper objectMapper = new ObjectMapper();;
 
     static class TestExample {
         private String name;
@@ -64,13 +67,14 @@ public class AstToIrTest {
     }
 
     @DisplayName("Test parsing EYG IR examples")
-    @ParameterizedTest(name = "{0}")
+    @ParameterizedTest()
     @ArgumentsSource(IrExamplesProvider.class)
-    void testIrParsing(TestExample example) throws IOException {
+    void testCodeParsing(TestExample example) throws IOException {
         if (Set.of("binary", "vacant", "no match").contains(example.name)) {
             // skip
             return;
         }
+
         EygTransformer.ParseResult result = EygTransformer.parse(example.getCode());
         assertNotNull(result.program());
         assertTrue(result.syntaxErrors().isEmpty(), example.getName() + " : " + result.syntaxErrors().toString());
@@ -82,6 +86,28 @@ public class AstToIrTest {
 //        assertEquals(example.getSource(), actualIr.get("source"),
 //                "The source part of the IR should match the expected source for: " + example.getName());
     }
+
+    @DisplayName("Test parsing EYG IR examples")
+    @ParameterizedTest()
+    @ArgumentsSource(IrExamplesProvider.class)
+    void testIrParsing(TestExample example) throws IOException {
+        JsonNode jsonNode = objectMapper.valueToTree(example.getSource());
+        Ir.Node result = Ir.parseNode(jsonNode);
+        assertNotNull(result);
+    }
+
+    @DisplayName("Test serialization of EYG IR examples")
+    @ParameterizedTest()
+    @ArgumentsSource(IrExamplesProvider.class)
+    void testIrSerialization(TestExample example) throws IOException {
+
+        JsonNode jsonNode = objectMapper.valueToTree(example.getSource());
+        Ir.Node parsed = Ir.parseNode(jsonNode);
+        JsonNode serialized = Ir.serializeNode(parsed);
+        assertNotNull(serialized);
+        assertEquals(serialized, jsonNode);
+    }
+
 
     static class IrExamplesProvider implements ArgumentsProvider {
         @Override

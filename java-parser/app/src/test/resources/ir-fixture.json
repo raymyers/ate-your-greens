@@ -52,7 +52,7 @@
         "l": "x"
       }
     },
-    "code": "let x = \"hi\"\nx"
+    "code": "x = \"hi\"\nx"
   },
   {
     "name": "binary",
